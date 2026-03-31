@@ -7,9 +7,9 @@ Gestionnaire de devoirs & deadlines pour étudiants.
 - Base de données : SQLite
 
 ## Équipe
-- [Ton nom] — Backend + Base de données
-- [Membre 2] — Frontend React + Logique
-- [Membre 3] — UI/UX + Figma + Stats
+- Theodore Louisjuste
+- Shadaie Lozier
+- Rosar
 
 ## Lancer le projet
 ### Frontend
