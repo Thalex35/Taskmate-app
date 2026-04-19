@@ -1,0 +1,14 @@
+:root {
+  /* Colors pour le navbar et le menu */
+  --header-menu_color: #ffffff;
+  --header-menu_border_color: #72caa7;
+  --btn_add_devoir_color: #2c867a;
+  --background-menu_color: #f4fffb;
+
+  /* Colors common */
+  --pricipal_color: #f5fdfa;
+  --background_card_color: #a3c7b8;
+  --btn_color: #2c867a;
+  --btn_annuler: #f7fffe;
+  --all_input_color: #e5fffe;
+}

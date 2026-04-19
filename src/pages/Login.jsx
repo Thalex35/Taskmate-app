@@ -1,0 +1,9 @@
+// wa efase sa yo
+
+export default function Login() {
+  return (
+    <div>
+      <h1>Connexion</h1>
+    </div>
+  );
+}
