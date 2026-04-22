@@ -3,6 +3,7 @@ import { Link } from "react-router-dom";
 import { Sun, Moon } from "lucide-react";
 import "../../styles/NavBar.css"
 
+
 export default function NavBar() {
 
   const[modeSombre, setModeSombre] = useState(false);
