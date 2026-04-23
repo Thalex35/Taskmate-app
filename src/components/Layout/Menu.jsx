@@ -1,5 +1,4 @@
-import { useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 import "../../styles/Menu.css";
 
 const menuSection = [
@@ -18,12 +17,12 @@ const menuSection = [
 
   {
     label: "Compte",
-    items: [{ id: "profil", label: "Profil", path: "/profil" }],
+    items: [{ id: "profile", label: "Profil", path: "/profile" }],
   },
 ];
 
 export default function Menu() {
-  const [active, setActive] = useState("dashboard");
+  const location = useLocation();
 
   return (
     <aside className="menu">
@@ -35,8 +34,9 @@ export default function Menu() {
               <Link
                 key={item.id}
                 to={item.path}
-                className={`menu-item ${active === item.id ? "active" : ""}`}
-                onClick={() => setActive(item.id)}
+                className={`menu-item ${
+                  location.pathname === item.path ? "active" : ""
+                }`}
               >
                 <span className="menu-dot" />
                 {item.label}

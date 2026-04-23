@@ -1,9 +1,11 @@
-// wa efase sa yo
+import NavBar from "../components/Layout/NavBar";
+import Menu from "../components/Layout/Menu";
 
 export default function Profile() {
   return (
     <div>
-      <h1>Profil</h1>
+      <NavBar />
+      <Menu />
     </div>
   );
 }

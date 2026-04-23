@@ -1,10 +1,11 @@
 import NavBar from "../components/Layout/NavBar";
+import Menu from "../components/Layout/Menu";
 
 export default function Devoirs() {
   return (
     <div>
       <NavBar />
-      <h1>Liste des Devoirs</h1>
+      <Menu />
     </div>
   );
 }

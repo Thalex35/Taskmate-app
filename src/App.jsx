@@ -10,7 +10,7 @@ export default function App() {
   return (
     <BrowserRouter>
       <Routes>
-        <Route path="/" element={<Dashboard />} />
+        <Route path="/dashboard" element={<Dashboard />} />
         <Route path="/devoirs" element={<Devoirs />} />
         <Route path="/matieres" element={<Matieres />} />
         <Route path="/profile" element={<Profile />} />
