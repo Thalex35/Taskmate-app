@@ -10,8 +10,8 @@
   justify-content: space-between;
   min-height: var(--navbar-height);
   padding: 12px 100px;
-  background-color: #ffffff;
-  border-bottom: 1px solid #e0f2ee;
+  background-color: var(--tm-white);
+  border-bottom: 1px solid var(--tm-teal-mid);
 }
 
 .navbar-logo {
@@ -19,12 +19,12 @@
   align-items: center;
   gap: 0;
   text-decoration: none;
-  background-color: var(--logo_background_color);
+  background-color: var(--tm-teal-light);
   padding: 8px 18px;
   border-radius: 12px;
   font-size: 25px;
   font-weight: 700;
-  color: black;
+  color: var(--tm-text);
 }
 
 .navbar-logo-task,
@@ -33,11 +33,11 @@
 }
 
 .navbar-logo-task {
-  color: #000000;
+  color: var(--tm-text);
 }
 
 .navbar-logo-mate {
-  color: #1d9e75;
+  color: var(--tm-teal);
 }
 
 .navbar-action {
@@ -54,9 +54,9 @@
   height: 40px;
   padding: 0 16px;
   border-radius: 8px;
-  border: 1px solid #1d9e75;
+  border: 1px solid var(--tm-teal-mid);
   background: transparent;
-  color: #1d9e75;
+  color: var(--tm-text);
   font-size: 14px;
   white-space: nowrap;
   cursor: pointer;
@@ -64,13 +64,13 @@
 }
 
 .navbar-btn-mode:hover {
-  background-color: #e8f7f3;
+  background-color: var(--tm-teal-light);
 }
 
 .navbar-btn-logout {
   padding: 10px 16px;
   border-radius: 8px;
-  background-color: #1d9e75;
+  background-color: var(--tm-teal);
   color: #ffffff;
   font-size: 14px;
   text-decoration: none;
@@ -81,7 +81,7 @@
 .navbar-btn-nouveau {
   padding: 10px 16px;
   border-radius: 8px;
-  background-color: #1d9e75;
+  background-color: var(--tm-teal);
   color: #ffffff;
   font-size: 14px;
   text-decoration: none;
@@ -90,7 +90,7 @@
 }
 
 .navbar-btn-nouveau:hover {
-  background-color: #178a65;
+  background-color: var(--tm-teal-dark);
 }
 
 .navbar-btn-profile {
@@ -102,7 +102,7 @@
   padding: 0;
   border-radius: 50%;
   border: 1px solid #ffffff;
-  background-color: #178a65;
+  background-color: var(--tm-teal-dark);
   color: #ffffff;
   font-size: 14px;
   cursor: pointer;
