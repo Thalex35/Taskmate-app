@@ -1,3 +1,9 @@
-export default function NewDevoir() {
-  return <div></div>;
+import MatieresForm from "../components/matieres/matieresForm";
+
+export default function NewMatieres() {
+  return (
+    <div>
+      <MatieresForm />
+    </div>
+  );
 }

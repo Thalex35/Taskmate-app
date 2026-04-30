@@ -1,0 +1,12 @@
+ul {
+  list-style: none;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px;
+}
+
+li {
+  border: 1px solid gray;
+  padding: 20px;
+  width: 300px;
+}
