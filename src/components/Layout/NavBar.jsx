@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import { Link } from "react-router-dom";
 
 import { Sun, Moon } from "lucide-react";
@@ -38,7 +38,7 @@ export default function NavBar({
 
         <Link to= "/devoir/nouveau"
         className="navbar-btn-nouveau">
-          + Nouveau Devoir
+          + Nouveau Devoir </Link>
 
         {showMode && (
           <button
@@ -66,4 +66,4 @@ export default function NavBar({
       </div>
     </nav>
   );
-}
+}}
