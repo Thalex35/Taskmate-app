@@ -1,21 +1,37 @@
+
 import "../../styles/DevoirCard.css";
 
 export default function DevoirCard({ devoir, onMarquerTermine }) {
   const { id, titre, matiere, priorite, statut, dateLimit, joursRestants } = devoir;
 
+export default function DevoirCard({ devoir, onMarquerTermine }) {
+  const { id, titre, matiere, priorite, statut, dateLimit, joursRestants } =
+    devoir;
+r
+
   const statutClass =
     statut === "Terminé"
       ? "badge badge-termine"
       : statut === "En cours"
+
       ? "badge badge-encours"
       : "badge badge-afaire";
+
+        ? "badge badge-encours"
+        : "badge badge-afaire";
+
 
   const prioriteClass =
     priorite === "Haute"
       ? "badge badge-haute"
       : priorite === "Moyenne"
+
       ? "badge badge-moyenne"
       : "badge badge-basse";
+
+        ? "badge badge-moyenne"
+        : "badge badge-basse";
+
 
   const joursTexte =
     joursRestants === 0 ? "Aujourd'hui !" : `${joursRestants}j restants`;
@@ -54,7 +70,14 @@ export default function DevoirCard({ devoir, onMarquerTermine }) {
 
       {/* Bouton */}
       {statut !== "Terminé" ? (
+
         <button className="card-btn-terminer" onClick={() => onMarquerTermine(id)}>
+
+        <button
+          className="card-btn-terminer"
+          onClick={() => onMarquerTermine(id)}
+        >
+
           Marquer comme terminer
         </button>
       ) : (

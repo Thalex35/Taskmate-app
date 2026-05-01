@@ -1,5 +1,3 @@
-// wa efase sa yo
-
 export default function Profile() {
   return (
     <div>

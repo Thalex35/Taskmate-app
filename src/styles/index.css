@@ -1,4 +1,6 @@
 :root {
+  --navbar-height: 73px;
+
   /* Logo */
   --logo_text_color: #2d986d;
   --logo_background_color: #d9fef4;
@@ -33,4 +35,18 @@
   --btn_finish_background_color: #f1fffe;
   --btn_finish_text_color: #030804;
   --btn_finish_border_color: #008355;
+}
+
+body {
+  background-color: var(--pricipal_color);
+}
+
+.body_pages {
+  display: flex;
+  min-height: calc(100vh - var(--navbar-height));
+}
+
+.body_pages main {
+  flex: 1;
+  min-width: 0;
 }

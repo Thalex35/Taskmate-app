@@ -1,0 +1,18 @@
+.matList {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(360px, 1fr));
+  gap: 20px;
+  width: 100%;
+}
+
+.matList__empty {
+  margin: 0 0 12px;
+  color: #6c7c75;
+  font-size: 14px;
+}
+
+@media (max-width: 760px) {
+  .matList {
+    grid-template-columns: 1fr;
+  }
+}
