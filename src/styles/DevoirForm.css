@@ -1,0 +1,102 @@
+/* ===== DEVOIR FORM ===== */
+
+.form-page {
+  padding: 24px;
+  background-color: var(--pricipal_color);
+  min-height: 100vh;
+  font-family: sans-serif;
+}
+
+.form-titre {
+  font-size: 22px;
+  font-weight: 700;
+  color: var(--text_color);
+  margin: 0 0 24px;
+}
+
+.form-container {
+  background-color: var(--header-menu_color);
+  border: 1px solid var(--header-menu_border_color);
+  border-radius: 12px;
+  padding: 28px;
+  max-width: 500px;
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+}
+
+/* Groupe champ */
+.form-group {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.form-label {
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--text_color);
+}
+
+.form-input {
+  padding: 10px 14px;
+  border-radius: 8px;
+  border: 1px solid var(--header-menu_border_color);
+  background-color: var(--all_input_color);
+  font-size: 14px;
+  color: var(--text_color);
+  outline: none;
+  transition: border 0.15s ease;
+}
+
+.form-input:focus {
+  border-color: var(--btn_color);
+}
+
+.input-erreur {
+  border-color: var(--dateLimit_text_color);
+}
+
+.form-erreur {
+  font-size: 12px;
+  color: var(--dateLimit_text_color);
+}
+
+/* Boutons */
+.form-btns {
+  display: flex;
+  gap: 12px;
+  justify-content: flex-end;
+  margin-top: 8px;
+}
+
+.btn-annuler {
+  padding: 9px 20px;
+  border-radius: 8px;
+  border: 1px solid var(--header-menu_border_color);
+  background-color: var(--btn_annuler);
+  color: var(--btn_color);
+  font-size: 14px;
+  cursor: pointer;
+  transition: background 0.15s ease;
+}
+
+.btn-annuler:hover {
+  background-color: var(--pricipal_color);
+}
+
+.btn-soumettre {
+  padding: 9px 20px;
+  border-radius: 8px;
+  border: none;
+  background-color: var(--btn_add_devoir_color);
+  color: #ffffff;
+  font-size: 14px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: opacity 0.15s ease;
+}
+
+.btn-soumettre:hover {
+  opacity: 0.9;
+}
