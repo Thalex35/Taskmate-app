@@ -17,12 +17,12 @@ create table if not exists public.devoirs (
   titre text not null,
   description text,
   date_limite date not null,
-  priorite text not null default 'Moyenne',
-  statut text not null default 'A faire',
+  priorite text not null default 'moyenne',
+  statut text not null default 'a_faire',
   created_at timestamptz not null default now(),
   updated_at timestamptz not null default now(),
-  constraint devoirs_priorite_check check (priorite in ('Basse', 'Moyenne', 'Haute')),
-  constraint devoirs_statut_check check (statut in ('A faire', 'En cours', 'Termine'))
+  constraint devoirs_priorite_check check (priorite in ('basse', 'moyenne', 'haute')),
+  constraint devoirs_statut_check check (statut in ('a_faire', 'en_cours', 'termine'))
 );
 
 create or replace function public.set_updated_at()

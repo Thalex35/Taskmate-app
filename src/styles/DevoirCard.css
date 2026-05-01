@@ -9,6 +9,19 @@
   flex-direction: column;
   gap: 10px;
   font-family: sans-serif;
+  cursor: pointer;
+  transition:
+    border-color 0.15s ease,
+    transform 0.15s ease,
+    box-shadow 0.15s ease;
+}
+
+.devoir-card:hover,
+.devoir-card:focus-visible {
+  border-color: var(--btn_color);
+  box-shadow: 0 8px 20px rgba(44, 134, 122, 0.12);
+  transform: translateY(-1px);
+  outline: none;
 }
 
 /* Header */
