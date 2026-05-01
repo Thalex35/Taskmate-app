@@ -1,0 +1,79 @@
+.cardMat {
+  min-height: 116px;
+  display: grid;
+  grid-template-columns: auto minmax(0, 1fr) auto;
+  align-items: center;
+  gap: 20px;
+  box-sizing: border-box;
+  border: 1px solid #dce8e4;
+  border-radius: 8px;
+  background-color: var(--header-menu_color);
+  padding: 22px 26px;
+}
+
+.cardMat__logo {
+  width: 38px;
+  height: 38px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 8px;
+  color: var(--header-menu_color);
+  font-size: 13px;
+  font-weight: 800;
+  line-height: 1;
+}
+
+.cardMat__content {
+  min-width: 0;
+}
+
+.cardMat__content h2 {
+  margin: 0 0 3px;
+  color: var(--text_color);
+  font-size: 15px;
+  font-weight: 800;
+  line-height: 1.2;
+}
+
+.cardMat__content p {
+  margin: 0;
+  color: #8aa0ad;
+  font-size: 13px;
+  font-weight: 600;
+  line-height: 1.2;
+}
+
+.cardMat__delete {
+  min-width: 150px;
+  height: 70px;
+  display: inline-flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 5px;
+  border: 1px solid #bfc9c4;
+  border-radius: 8px;
+  background-color: var(--header-menu_color);
+  color: var(--text_color);
+  font-size: 15px;
+  font-weight: 800;
+  cursor: pointer;
+}
+
+.cardMat__delete svg {
+  color: #8b9691;
+}
+
+@media (max-width: 520px) {
+  .cardMat {
+    grid-template-columns: auto 1fr;
+  }
+
+  .cardMat__delete {
+    grid-column: 1 / -1;
+    width: 100%;
+    height: 42px;
+    flex-direction: row;
+  }
+}

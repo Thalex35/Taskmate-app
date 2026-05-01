@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
-import { supabase } from "../lib/supabase";
 import { Link } from "react-router-dom";
 import MatieresList from "../components/matieres/matieresList";
+import { supabase } from "../lib/supabase";
 import "../styles/matieres.css";
 
 export default function Matieres() {
@@ -28,20 +28,33 @@ export default function Matieres() {
     fetchMatieres();
   }, []);
 
+  async function handleDeleteMatiere(id) {
+    const { error } = await supabase.from("matieres").delete().eq("id", id);
+
+    if (error) {
+      setErrorMessage(error.message);
+      return;
+    }
+
+    setMatieres((currentMatieres) =>
+      currentMatieres.filter((matiere) => matiere.id !== id),
+    );
+  }
+
   if (loading) {
-    return <p>Chargement des matières...</p>;
+    return <p className="matieresPage__loading">Chargement des matieres...</p>;
   }
 
   return (
-    <div>
-      <h1>Mes matières</h1>
+    <div className="matieresPage">
+      <h1>Mes matieres</h1>
 
-      {errorMessage && <p>{errorMessage}</p>}
+      {errorMessage && <p className="matieresPage__error">{errorMessage}</p>}
 
-      <MatieresList matieres={matieres} />
+      <MatieresList matieres={matieres} onDeleteMatiere={handleDeleteMatiere} />
 
-      <Link to="/new-matieres">
-        <button>Créer une nouvelle matière</button>
+      <Link className="matieresPage__add" to="/new-matieres">
+        + Ajouter une matiere
       </Link>
     </div>
   );
