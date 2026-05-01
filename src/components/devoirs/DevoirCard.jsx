@@ -1,11 +1,11 @@
 import "../../styles/DevoirCard.css";
 
-export default function DevoirCard({ devoir, onMarquerTermine }) {
+export default function DevoirCard({ devoir, onMarquerTermine, onSelect }) {
   const { id, titre, matiere, priorite, statut, dateLimit, joursRestants } =
     devoir;
 
   const statutClass =
-    statut === "Terminé"
+    statut === "Termine"
       ? "badge badge-termine"
       : statut === "En cours"
         ? "badge badge-encours"
@@ -22,21 +22,33 @@ export default function DevoirCard({ devoir, onMarquerTermine }) {
     joursRestants === 0 ? "Aujourd'hui !" : `${joursRestants}j restants`;
 
   const joursClass = joursRestants <= 2 ? "card-jours urgent" : "card-jours";
+  const statutTexte = statut === "Termine" ? "Termine" : statut;
 
   return (
-    <div className="devoir-card">
+    <article
+      className="devoir-card"
+      role="button"
+      tabIndex={0}
+      onClick={() => onSelect(devoir)}
+      onKeyDown={(event) => {
+        if (event.key === "Enter" || event.key === " ") {
+          event.preventDefault();
+          onSelect(devoir);
+        }
+      }}
+    >
       <div className="card-header">
         <h3 className="card-titre">{titre}</h3>
-        <div className="card-icons">
-          <span>✏️</span>
-          <span>🗑️</span>
+        <div className="card-icons" onClick={(event) => event.stopPropagation()}>
+          <span>Modifier</span>
+          <span>Supprimer</span>
         </div>
       </div>
 
       <div className="card-badges">
         <span className="badge badge-matiere">{matiere}</span>
         <span className={prioriteClass}>{priorite}</span>
-        <span className={statutClass}>{statut}</span>
+        <span className={statutClass}>{statutTexte}</span>
       </div>
 
       <div className="card-footer">
@@ -50,16 +62,19 @@ export default function DevoirCard({ devoir, onMarquerTermine }) {
         <span className={joursClass}>{joursTexte}</span>
       </div>
 
-      {statut !== "Terminé" ? (
+      {statut !== "Termine" ? (
         <button
           className="card-btn-terminer"
-          onClick={() => onMarquerTermine(id)}
+          onClick={(event) => {
+            event.stopPropagation();
+            onMarquerTermine(id);
+          }}
         >
-          Marquer comme terminé
+          Marquer comme termine
         </button>
       ) : (
-        <div className="card-termine-label">✅ Terminé</div>
+        <div className="card-termine-label">Termine</div>
       )}
-    </div>
+    </article>
   );
 }

@@ -1,48 +1,119 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
+import { supabase } from "../../lib/supabase";
 import "../../styles/DevoirForm.css";
 
-const matieres = ["Informatique", "Business", "Anglais", "Mathématiques", "Histoire", "Autre"];
-const priorites = ["Haute", "Moyenne", "Basse"];
-const statuts = ["A faire", "En cours", "Terminé"];
+const priorites = [
+  { label: "Haute", value: "haute" },
+  { label: "Moyenne", value: "moyenne" },
+  { label: "Basse", value: "basse" },
+];
+
+const statuts = [
+  { label: "A faire", value: "a_faire" },
+  { label: "En cours", value: "en_cours" },
+  { label: "Termine", value: "termine" },
+];
 
 export default function DevoirForm() {
   const navigate = useNavigate();
 
+  const [matieres, setMatieres] = useState([]);
+  const [loadingMatieres, setLoadingMatieres] = useState(true);
+  const [loadingSubmit, setLoadingSubmit] = useState(false);
+  const [errorMessage, setErrorMessage] = useState("");
+  const [erreurs, setErreurs] = useState({});
   const [form, setForm] = useState({
     titre: "",
-    matiere: "",
-    priorite: "",
-    statut: "",
-    dateLimit: "",
+    matiereId: "",
+    priorite: "moyenne",
+    statut: "a_faire",
+    dateLimite: "",
+    description: "",
   });
 
-  const [erreurs, setErreurs] = useState({});
+  useEffect(() => {
+    async function fetchMatieres() {
+      const { data, error } = await supabase
+        .from("matieres")
+        .select("id, nom")
+        .order("nom", { ascending: true });
 
-  const handleChange = (e) => {
-    const { name, value } = e.target;
+      if (error) {
+        setErrorMessage(error.message);
+      } else {
+        setMatieres(data);
+        setForm((prev) => ({
+          ...prev,
+          matiereId: data[0]?.id || "",
+        }));
+      }
+
+      setLoadingMatieres(false);
+    }
+
+    fetchMatieres();
+  }, []);
+
+  const handleChange = (event) => {
+    const { name, value } = event.target;
     setForm((prev) => ({ ...prev, [name]: value }));
     setErreurs((prev) => ({ ...prev, [name]: "" }));
+    setErrorMessage("");
   };
 
   const valider = () => {
     const nouvellesErreurs = {};
+
     if (!form.titre.trim()) nouvellesErreurs.titre = "Le titre est requis.";
-    if (!form.matiere) nouvellesErreurs.matiere = "La matière est requise.";
-    if (!form.priorite) nouvellesErreurs.priorite = "La priorité est requise.";
+    if (!form.matiereId) nouvellesErreurs.matiereId = "La matiere est requise.";
+    if (!form.priorite) nouvellesErreurs.priorite = "La priorite est requise.";
     if (!form.statut) nouvellesErreurs.statut = "Le statut est requis.";
-    if (!form.dateLimit) nouvellesErreurs.dateLimit = "La date limite est requise.";
+    if (!form.dateLimite)
+      nouvellesErreurs.dateLimite = "La date limite est requise.";
+
     return nouvellesErreurs;
   };
 
-  const handleSubmit = (e) => {
-    e.preventDefault();
+  const handleSubmit = async (event) => {
+    event.preventDefault();
+    setErrorMessage("");
+
     const nouvellesErreurs = valider();
     if (Object.keys(nouvellesErreurs).length > 0) {
       setErreurs(nouvellesErreurs);
       return;
     }
-    // Rediriger vers la liste après soumission
+
+    setLoadingSubmit(true);
+
+    const {
+      data: { user },
+      error: userError,
+    } = await supabase.auth.getUser();
+
+    if (userError || !user) {
+      setErrorMessage("Utilisateur non connecte.");
+      setLoadingSubmit(false);
+      return;
+    }
+
+    const { error } = await supabase.from("devoirs").insert({
+      user_id: user.id,
+      matiere_id: form.matiereId,
+      titre: form.titre.trim(),
+      description: form.description.trim() || null,
+      date_limite: form.dateLimite,
+      priorite: form.priorite,
+      statut: form.statut,
+    });
+
+    if (error) {
+      setErrorMessage(error.message);
+      setLoadingSubmit(false);
+      return;
+    }
+
     navigate("/devoirs");
   };
 
@@ -52,98 +123,146 @@ export default function DevoirForm() {
 
   return (
     <div className="form-page">
-      <h1 className="form-titre">Nouveau Devoir</h1>
-
       <form className="form-container" onSubmit={handleSubmit}>
+        <h1 className="form-titre">Nouveau devoir</h1>
 
-        {/* Titre */}
-        <div className="form-group">
-          <label className="form-label">Titre</label>
+        {errorMessage && <p className="form-error-message">{errorMessage}</p>}
+
+        <div className="form-group form-group-full">
+          <label className="form-label" htmlFor="titre">
+            TITRE
+          </label>
           <input
+            id="titre"
             type="text"
             name="titre"
             value={form.titre}
             onChange={handleChange}
-            placeholder="Ex: Exercices React Hooks"
+            placeholder="Exercices chapitre 5"
             className={`form-input ${erreurs.titre ? "input-erreur" : ""}`}
           />
           {erreurs.titre && <span className="form-erreur">{erreurs.titre}</span>}
         </div>
 
-        {/* Matière */}
-        <div className="form-group">
-          <label className="form-label">Matière</label>
-          <select
-            name="matiere"
-            value={form.matiere}
-            onChange={handleChange}
-            className={`form-input ${erreurs.matiere ? "input-erreur" : ""}`}
-          >
-            <option value="">Choisir une matière</option>
-            {matieres.map((m) => (
-              <option key={m} value={m}>{m}</option>
-            ))}
-          </select>
-          {erreurs.matiere && <span className="form-erreur">{erreurs.matiere}</span>}
+        <div className="form-grid">
+          <div className="form-group">
+            <label className="form-label" htmlFor="matiereId">
+              MATIERE
+            </label>
+            <select
+              id="matiereId"
+              name="matiereId"
+              value={form.matiereId}
+              onChange={handleChange}
+              disabled={loadingMatieres}
+              className={`form-input ${
+                erreurs.matiereId ? "input-erreur" : ""
+              }`}
+            >
+              <option value="">
+                {loadingMatieres ? "Chargement..." : "Choisir une matiere"}
+              </option>
+              {matieres.map((matiere) => (
+                <option key={matiere.id} value={matiere.id}>
+                  {matiere.nom}
+                </option>
+              ))}
+            </select>
+            {erreurs.matiereId && (
+              <span className="form-erreur">{erreurs.matiereId}</span>
+            )}
+          </div>
+
+          <div className="form-group">
+            <label className="form-label" htmlFor="dateLimite">
+              DEADLINE
+            </label>
+            <input
+              id="dateLimite"
+              type="date"
+              name="dateLimite"
+              value={form.dateLimite}
+              onChange={handleChange}
+              className={`form-input ${
+                erreurs.dateLimite ? "input-erreur" : ""
+              }`}
+            />
+            {erreurs.dateLimite && (
+              <span className="form-erreur">{erreurs.dateLimite}</span>
+            )}
+          </div>
+
+          <div className="form-group">
+            <label className="form-label" htmlFor="priorite">
+              PRIORITE
+            </label>
+            <select
+              id="priorite"
+              name="priorite"
+              value={form.priorite}
+              onChange={handleChange}
+              className={`form-input ${erreurs.priorite ? "input-erreur" : ""}`}
+            >
+              {priorites.map((priorite) => (
+                <option key={priorite.value} value={priorite.value}>
+                  {priorite.label}
+                </option>
+              ))}
+            </select>
+            {erreurs.priorite && (
+              <span className="form-erreur">{erreurs.priorite}</span>
+            )}
+          </div>
+
+          <div className="form-group">
+            <label className="form-label" htmlFor="statut">
+              STATUT
+            </label>
+            <select
+              id="statut"
+              name="statut"
+              value={form.statut}
+              onChange={handleChange}
+              className={`form-input ${erreurs.statut ? "input-erreur" : ""}`}
+            >
+              {statuts.map((statut) => (
+                <option key={statut.value} value={statut.value}>
+                  {statut.label}
+                </option>
+              ))}
+            </select>
+            {erreurs.statut && (
+              <span className="form-erreur">{erreurs.statut}</span>
+            )}
+          </div>
         </div>
 
-        {/* Priorité */}
-        <div className="form-group">
-          <label className="form-label">Priorité</label>
-          <select
-            name="priorite"
-            value={form.priorite}
+        <div className="form-group form-group-full">
+          <label className="form-label" htmlFor="description">
+            DESCRIPTION
+          </label>
+          <textarea
+            id="description"
+            name="description"
+            value={form.description}
             onChange={handleChange}
-            className={`form-input ${erreurs.priorite ? "input-erreur" : ""}`}
-          >
-            <option value="">Choisir une priorité</option>
-            {priorites.map((p) => (
-              <option key={p} value={p}>{p}</option>
-            ))}
-          </select>
-          {erreurs.priorite && <span className="form-erreur">{erreurs.priorite}</span>}
-        </div>
-
-        {/* Statut */}
-        <div className="form-group">
-          <label className="form-label">Statut</label>
-          <select
-            name="statut"
-            value={form.statut}
-            onChange={handleChange}
-            className={`form-input ${erreurs.statut ? "input-erreur" : ""}`}
-          >
-            <option value="">Choisir un statut</option>
-            {statuts.map((s) => (
-              <option key={s} value={s}>{s}</option>
-            ))}
-          </select>
-          {erreurs.statut && <span className="form-erreur">{erreurs.statut}</span>}
-        </div>
-
-        {/* Date limite */}
-        <div className="form-group">
-          <label className="form-label">Date limite</label>
-          <input
-            type="date"
-            name="dateLimit"
-            value={form.dateLimit}
-            onChange={handleChange}
-            className={`form-input ${erreurs.dateLimit ? "input-erreur" : ""}`}
+            placeholder="Instructions, details..."
+            className="form-input form-textarea"
           />
-          {erreurs.dateLimit && <span className="form-erreur">{erreurs.dateLimit}</span>}
         </div>
 
-        {/* Boutons */}
         <div className="form-btns">
           <button type="button" className="btn-annuler" onClick={handleAnnuler}>
             Annuler
           </button>
-          <button type="submit" className="btn-soumettre">
-            + Ajouter le devoir
+          <button
+            type="submit"
+            className="btn-soumettre"
+            disabled={loadingSubmit || loadingMatieres}
+          >
+            {loadingSubmit ? "Ajout..." : "Ajouter le devoir"}
           </button>
         </div>
-
       </form>
     </div>
   );

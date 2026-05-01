@@ -1,3 +1,5 @@
+import DevoirForm from "../components/devoirs/DevoirForm";
+
 export default function NewDevoir() {
-  return <div></div>;
+  return <DevoirForm />;
 }
