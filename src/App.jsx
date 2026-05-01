@@ -10,6 +10,7 @@ import SignUp from "./pages/SignUp.jsx";
 import NewDevoir from "./pages/NewDevoir.jsx";
 import NewMatieres from "./pages/NewMatieres.jsx";
 
+
 export default function App() {
   return (
     <BrowserRouter>

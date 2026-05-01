@@ -1,0 +1,134 @@
+/* ===== DEVOIR CARD ===== */
+
+.devoir-card {
+  background-color: var(--background-menu_color);
+  border: 1px solid var(--header-menu_border_color);
+  border-radius: 12px;
+  padding: 16px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  font-family: sans-serif;
+}
+
+/* Header */
+.card-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+}
+
+.card-titre {
+  font-size: 15px;
+  font-weight: 600;
+  color: var(--text_color);
+  margin: 0;
+}
+
+.card-icons {
+  display: flex;
+  gap: 8px;
+  font-size: 14px;
+  cursor: pointer;
+}
+
+/* Badges */
+.card-badges {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+}
+
+.badge {
+  font-size: 11px;
+  padding: 3px 10px;
+  border-radius: 20px;
+  font-weight: 500;
+}
+
+.badge-matiere {
+  background-color: #d7def0;
+  color: #1a1a6e;
+}
+
+.badge-haute {
+  background-color: #e9e9c1;
+  color: var(--priorite_text_color);
+}
+
+.badge-moyenne {
+  background-color: #fde8c8;
+  color: #8a5200;
+}
+
+.badge-basse {
+  background-color: #d4f5e2;
+  color: #065928;
+}
+
+.badge-afaire {
+  background-color: var(--status_text_color);
+  color: var(--status_text_color);
+  background-color: #effef5;
+  color: #063919;
+}
+
+.badge-encours {
+  background-color: #cce5ff;
+  color: #003d80;
+}
+
+.badge-termine {
+  background-color: #d4f5e2;
+  color: #065928;
+}
+
+/* Footer date + jours */
+.card-footer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.card-date {
+  font-size: 13px;
+  color: var(--text_color);
+}
+
+.card-jours {
+  font-size: 12px;
+  padding: 3px 10px;
+  border-radius: 20px;
+  background-color: #d4f5e2;
+  color: #065928;
+}
+
+.card-jours.urgent {
+  background-color: #ffd6d6;
+  color: var(--dateLimit_text_color);
+  font-weight: 600;
+}
+
+/* Bouton terminer */
+.card-btn-terminer {
+  width: 100%;
+  padding: 9px;
+  border-radius: 8px;
+  border: 1px solid var(--btn_finish_border_color);
+  background-color: var(--btn_finish_background_color);
+  color: var(--btn_finish_text_color);
+  font-size: 13px;
+  cursor: pointer;
+  transition: background 0.15s ease;
+}
+
+.card-btn-terminer:hover {
+  background-color: #d4f5e2;
+}
+
+.card-termine-label {
+  text-align: center;
+  font-size: 13px;
+  color: #065928;
+  font-weight: 500;
+}
