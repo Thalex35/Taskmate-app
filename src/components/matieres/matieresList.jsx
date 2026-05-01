@@ -1,8 +1,8 @@
-import MatieresCard from "./MatieresCard";
+import MatieresCard from "./matieresCard";
 
-export default function matieresList({ matieres }) {
+export default function MatieresList({ matieres }) {
   if (matieres.length === 0) {
-    return <p>Aucun matiere pour le moment</p>;
+    return <p>Aucune matière pour le moment.</p>;
   }
 
   return (
