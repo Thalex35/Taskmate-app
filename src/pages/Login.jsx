@@ -55,7 +55,7 @@ export default function Login() {
       <form className="login__form" onSubmit={handleSubmit}>
         <div className="login__intro">
           <h3>TaskMate</h3>
-          <p>Connecte-toi a ton compte</p>
+          <p>Connecte-toi à ton compte</p>
         </div>
 
         <div className="login__field">
@@ -92,8 +92,8 @@ export default function Login() {
           </button>
 
           <div className="login__signup-link">
-            <p>Pas encore de compte?</p>
-            <Link to="/signup">Creer un compte</Link>
+            <p>Pas encore de compte ?</p>
+            <Link to="/signup">Créer un compte</Link>
           </div>
         </div>
       </form>

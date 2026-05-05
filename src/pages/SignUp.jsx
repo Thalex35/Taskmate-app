@@ -1,7 +1,7 @@
 import { Link } from "react-router-dom";
 import { useState } from "react";
-import "../styles/signup.css";
 import { supabase } from "../lib/supabase";
+import "../styles/signup.css";
 
 export default function SignUp() {
   const [formData, setFormData] = useState({
@@ -57,6 +57,7 @@ export default function SignUp() {
       setError(error.message);
       return;
     }
+
     setSuccess(
       "Compte créé avec succès ! Veuillez vérifier votre email pour confirmer votre compte.",
     );
@@ -73,13 +74,13 @@ export default function SignUp() {
 
       <form className="signup__form" onSubmit={handleSubmit}>
         <div className="signup__intro">
-          <h3>Creer un compte</h3>
+          <h3>Créer un compte</h3>
           <p>C&apos;est gratuit et rapide</p>
         </div>
 
         <div className="signup__row signup__row--two-columns">
           <div className="signup__field">
-            <label htmlFor="firstName">PRENOM</label>
+            <label htmlFor="firstName">PRÉNOM</label>
             <input
               type="text"
               id="firstName"
@@ -119,7 +120,7 @@ export default function SignUp() {
         </div>
 
         <div className="signup__field">
-          <label htmlFor="university">SHCOOL</label>
+          <label htmlFor="university">ÉCOLE</label>
           <input
             type="text"
             id="university"
@@ -163,11 +164,11 @@ export default function SignUp() {
         {success && <p className="signup__success">{success}</p>}
 
         <button className="signup__button" type="submit" disabled={loading}>
-          {loading ? "creation..." : "Creer mon compte"}
+          {loading ? "Création..." : "Créer mon compte"}
         </button>
 
         <div className="signup__login-link">
-          <p>Deja un compte ?</p>
+          <p>Déjà un compte ?</p>
           <Link to="/login">Se connecter</Link>
         </div>
       </form>

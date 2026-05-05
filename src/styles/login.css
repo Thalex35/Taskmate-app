@@ -1,6 +1,6 @@
 .login {
   min-height: 100vh;
-  padding: 34px 36px;
+  padding: 24px 36px 36px;
   display: flex;
   flex-direction: column;
   background: var(--pricipal_color);
@@ -8,10 +8,9 @@
 
 .login__header h1 {
   margin: 0;
-  font-size: clamp(2.4rem, 4vw, 3.1rem);
-  font-weight: 700;
-  letter-spacing: -0.04em;
-  color: #07120d;
+  font-size: clamp(2rem, 3vw, 2.55rem);
+  font-weight: 800;
+  color: var(--logo_task_color);
 }
 
 .login__header span {
@@ -19,54 +18,60 @@
 }
 
 .login__header h2 {
-  margin: 12px 0 0;
-  font-size: clamp(2rem, 3vw, 2.9rem);
-  font-weight: 400;
-  color: #09100d;
+  margin: 8px 0 0;
+  font-size: clamp(1.45rem, 2.2vw, 2rem);
+  font-weight: 600;
+  color: var(--muted_text_color);
 }
 
 .login__form {
-  width: min(100%, 430px);
-  margin: 82px auto 0;
+  width: min(100%, 380px);
+  margin: clamp(28px, 6vh, 52px) auto 0;
   display: flex;
   flex-direction: column;
   align-items: center;
 }
 
 .login__intro {
-  margin-bottom: 28px;
+  margin-bottom: 22px;
   text-align: center;
 }
 
 .login__intro h3 {
   margin: 0;
-  font-size: 2rem;
-  font-weight: 523;
-  color: #07120d;
+  font-size: 1.55rem;
+  font-weight: 800;
+  color: var(--text_color);
 }
 
 .login__intro p {
-  margin: 6px 0 0;
-  font-size: 0.95rem;
-  color: #1f2a26;
+  margin: 4px 0 0;
+  font-size: 0.88rem;
+  color: var(--muted_text_color);
 }
 
 .login__field {
   width: 100%;
-  margin-bottom: 16px;
+  margin-bottom: 14px;
   display: flex;
   flex-direction: column;
-  gap: 8px;
+  gap: 6px;
+}
+
+.login__field label {
+  color: var(--text_color);
+  font-size: 0.82rem;
+  font-weight: 700;
 }
 
 .login__field input {
-  height: 48px;
-  padding: 0 14px;
-  border: 1px solid rgba(44, 134, 122, 0.25);
-  border-radius: 10px;
+  height: 42px;
+  padding: 0 13px;
+  border: 1px solid var(--border_color);
+  border-radius: 8px;
   background: var(--all_input_color);
-  color: #09100d;
-  font-size: 0.92rem;
+  color: var(--text_color);
+  font-size: 0.88rem;
   outline: none;
   transition:
     border-color 0.2s ease,
@@ -82,6 +87,11 @@
   box-shadow: 0 0 0 3px rgba(44, 134, 122, 0.12);
 }
 
+html.dark .login__field input:focus {
+  border-color: var(--btn_color);
+  box-shadow: 0 0 0 3px rgba(34, 197, 94, 0.14);
+}
+
 .login__actions {
   width: 100%;
   margin-top: 8px;
@@ -89,13 +99,13 @@
 
 .login__button {
   width: 100%;
-  height: 42px;
+  height: 40px;
   border: none;
-  border-radius: 10px;
+  border-radius: 8px;
   background: var(--btn_color);
-  color: #ffffff;
-  font-size: 0.92rem;
-  font-weight: 500;
+  color: #06130b;
+  font-size: 0.88rem;
+  font-weight: 700;
   cursor: pointer;
 }
 
@@ -108,13 +118,19 @@
 }
 
 .login__signup-link {
-  margin-top: 12px;
+  margin-top: 10px;
   display: flex;
   justify-content: center;
   gap: 8px;
   flex-wrap: wrap;
-  font-size: 0.98rem;
-  color: #18211e;
+  font-size: 0.88rem;
+  color: var(--muted_text_color);
+}
+
+@media (max-width: 640px) {
+  .login {
+    padding: 22px 20px 34px;
+  }
 }
 
 .login__signup-link p {
@@ -122,7 +138,7 @@
 }
 
 .login__signup-link a {
-  color: #075a4f;
+  color: var(--btn_color);
   text-decoration: none;
 }
 
